@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<title>Chat Room</title>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+var z={{ user|tojson }}
+$(document).ready(function() {
+	var socket = io.connect('http://127.0.0.1:5000');
+	
+	socket.on('message', function(msg) {
+		$("#messages").append('<li>'+msg+'</li>');
+		console.log('Received message');
+	});
+		$('#sendbutton').on('click', function() {
+			var x=document.getElementById("myMessage").value;
+			var y=document.getElementById("mySelect").value;
+			
+			socket.send(z+" to "+y+":"+x);
+	});
+});
+	
+</script>
+<ul id="messages"></ul>
+
+<form>
+Message:<input type="text" id="myMessage">
+
+To:<select id="mySelect">
+  <option>a</option>
+  <option>b</option>
+  <option>c</option>
+</select>
+</form>
+
+<button id ="sendbutton">Send</button>
+
+</body>
+</html>
