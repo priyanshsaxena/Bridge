@@ -12,18 +12,36 @@ class deck(metaclass=abc.ABCMeta):
         arr = self.arr
         return arr
 
-    @abc.abstractmethod
-    def divide_cards(self):
-        pass
-
-class Method1111(deck):
-    def divide_cards(self):
-        p = [[],[],[],[]]
+    def Method1111(self):
+        divisions = [[],[],[],[]]
+        for i in range (52):
+            divisions[i%4].append(self.arr[i])
+        return divisions
+    
+    def Method1313(self):
+        divisions = [[],[],[],[]]
         for i in range (52):
             p[i%4].append(self.arr[i])
-        return p
+        return divisions
+    
+    def Method544(self):
+        divisions = [[],[],[],[]]
+        for i in range (52):
+            p[i%4].append(self.arr[i])
+        return divisions
 
-deck1 = Method1111()
+    @abc.abstractmethod
+    def func(self):
+        pass
+
+
+class Deck(deck):
+    def func(self):
+        pass
+
+
+deck1 = Deck()
 deck1.Shuffle()
-print(deck1.divide_cards())
+print(deck1.Method1111())
+
 
