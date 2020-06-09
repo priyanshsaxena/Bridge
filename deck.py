@@ -1,49 +1,40 @@
-import abc
+import itertools
+from enum import Enum
+from random import shuffle
 
-import numpy as np
 
+class Deck:
 
-class deck(metaclass=abc.ABCMeta):
+    class DistributionStrategy(Enum):
+        OneOne = 1
+        OneThree = 2
+        FiveFourFour = 3
+
     def __init__(self):
-        self.arr = np.arange(1, 53, 1)
+        self.cards = range(52)
+        self.distribution_strategies = {
+            Deck.DistributionStrategy.OneOne: self.one_one,
+            Deck.DistributionStrategy.OneThree: self.one_three,
+            Deck.DistributionStrategy.FiveFourFour: self.five_four_four
+        }
 
-    @abc.abstractmethod
-    def Shuffle(self):
-        pass
+    def shuffle(self):
+        shuffle(self.cards)
 
-    def Distribute(self):
-        pass
+    def distribute(self, distribution_strategy=DistributionStrategy.OneOne):
 
+        # TODO: Can we make the number of partitions configurable
+        return self.distribution_strategies[distribution_strategy]()
 
-class Deck(deck):
-    def Shuffle(self):
-        arr = self.arr
-        np.random.shuffle(arr)
-        self.arr = arr
+    def one_one(self):
+        return [list(self.cards[i::4]) for i in range(4)]
 
-    def Distribute(self, distributeMethod):
-        divisions = [[], [], [], []]
-        if distributeMethod == "1111":
-            for i in range(52):
-                divisions[i % 4].append(self.arr[i])
-            return divisions
+    def one_three(self):
+        return [list(self.cards[i * 13: (i + 1) * 13] for i in range(4))]
 
-        elif distributeMethod == "1313":
-            for i in range(52):
-                divisions[int(i//13)].append(self.arr[i])
-            return divisions
-        elif distributeMethod == "544":
-            for i in range(20):
-                divisions[i//5].append(self.arr[i])
-            for i in range(20, 36):
-                divisions[(i-20)//4].append(self.arr[i])
-            for i in range(36, 52):
-                divisions[(i-36)//4].append(self.arr[i])
-            return divisions
-
-
-deck1 = Deck()
-deck1.Shuffle()
-print(deck1.Distribute("1111"))
-print(deck1.Distribute("1313"))
-print(deck1.Distribute("544"))
+    def five_four_four(self):
+        return [list(itertools.chain.from_iterable([
+            self.cards[i * 5: (i + 1) * 5],
+            self.cards[20 + (i * 4): 24 + (i * 4)],
+            self.cards[36 + (i * 4): 40 + (i * 4)]
+        ])) for i in range(4)]
