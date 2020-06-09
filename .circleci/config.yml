@@ -26,6 +26,7 @@ jobs:
           destination: tests
 
 workflows:
+  version: 2
   main:
     jobs:
       - build
