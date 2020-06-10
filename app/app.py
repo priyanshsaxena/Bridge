@@ -13,13 +13,13 @@ __version__ = "0.1.0"
 __email__ = "askpriyansh@gmail.com"
 __status__ = "Non-Production"
 
-app = Flask(__name__)
+App = Flask(__name__)
 
 
-@app.route('/')
+@App.route('/')
 def index():
 	return "Hello World"
 
 
 if __name__ == '__main__':
-	app.run(debug=True)
+	App.run(debug=True)
