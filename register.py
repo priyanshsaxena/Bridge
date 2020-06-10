@@ -4,8 +4,8 @@
 Uses python-socketio.
 """
 
-import socketio
 import eventlet
+import socketio
 from flask import Flask, render_template
 
 __author__ = "Priyansh Saxena"
