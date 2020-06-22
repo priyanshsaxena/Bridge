@@ -1,0 +1,15 @@
+on: push
+name: Pre-checks
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ricardochaves/python-lint@v1.1.0
+        with:
+          use-pylint: false
+          use-black: false
+          use-pycodestyle: false
+          use-mypy: false
+          extra-flake8-options: "--select E231,E3,E4,E5,E7,W2,W6,F,B,G0"

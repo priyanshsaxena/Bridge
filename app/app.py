@@ -1,10 +1,10 @@
 #!/usr/bin/env python
-"""Creates the game-board needed to play Bridge.
+"""Flask base-code
 
-Uses Tkinter.
+Uses Flask.
 """
 
-import tkinter
+from flask import Flask
 
 __author__ = "Priyansh Saxena"
 __credits__ = ["Priyansh Saxena"]
@@ -13,5 +13,13 @@ __version__ = "0.1.0"
 __email__ = "askpriyansh@gmail.com"
 __status__ = "Non-Production"
 
-top = tkinter.Tk()
-top.mainloop()
+App = Flask(__name__)
+
+
+@App.route('/')
+def index():
+	return "Hello World"
+
+
+if __name__ == '__main__':
+	App.run(debug=True)
