@@ -1,7 +1,6 @@
 import random
 
 import pytest
-
 from app.deck import Deck
 
 test_data_shuffled_decks = [
