@@ -1,7 +1,7 @@
+import random
 import unittest
 
-from deck import Deck
-import random
+from app.deck import Deck
 
 
 class DeckTest(unittest.TestCase):
