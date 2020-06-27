@@ -1,4 +1,10 @@
-on: push
+on:
+  push:
+  pull_request:
+    - master
+  release:
+    types:
+      - created
 name: Pre-checks
 jobs:
   lint:
