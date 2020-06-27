@@ -1,7 +1,9 @@
 on:
+  push:
+    branches:
+      - 'ticket_*'
   pull_request:
     - master
-  push:
   release:
     types:
       - created
