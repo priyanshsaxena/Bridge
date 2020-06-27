@@ -1,12 +1,12 @@
 on:
   push:
-    branches:
-      - 'ticket_*'
   pull_request:
-    - master
+    branches:
+      - master
   release:
     types:
       - created
+
 name: Pre-checks
 jobs:
   lint:
